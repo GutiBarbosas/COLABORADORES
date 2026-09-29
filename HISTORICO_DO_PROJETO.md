@@ -1,0 +1,57 @@
+# Histórico do Projeto
+
+## Etapa 1 — Visualização de colaboradores
+- Base: `BASE_DASH.xlsx` (aba "RELA FINAL", 339 colaboradores ativos, 11 colunas).
+- Entregue: cartões (nome, função, loja, município/LOC, gerente, supervisor, admissão), busca por nome e 5 filtros.
+- Não incluído de propósito: indicadores, cálculos, deploy, autenticação.
+- Observações da base: cabeçalhos originais `MUNICIPIO` e `CPNJ` mantidos como estão; FUNÇÃO com "Gerente"/"GERENTE" e um valor `0`.
+
+## Etapa 2 — Nova base sem dados sensíveis
+- Base passou a ser `BASE_DASH_GITHUB.xlsx` (339 colaboradores, 8 colunas: SUPERVISOR, GERENTE, FUNÇÃO, MUNICIPIO, DT_NASC, LOJA, COLABORADOR, ADMISSÃO), usada exclusivamente.
+- CPF, SALÁRIO e CNPJ removidos de `data/colaboradores.js` e do dashboard; a planilha completa fica só no computador, fora do GitHub.
+- `scripts/xlsx_para_js.py` agora gera apenas os 8 campos (ignora as demais colunas e avisa se faltar alguma).
+- Dashboard inalterado: busca, 5 filtros, cards, tema claro/escuro, layout responsivo.
+- Próxima etapa (ainda não iniciada): aniversários e contratos de experiência.
+
+## Etapa 3 — Próximos aniversários
+- Nova seção "🎂 Próximos aniversários" no topo da página: nome, dia/mês, loja e função; ordenada do mais próximo ao mais distante; "Hoje" destacado; mensagem simples quando não há aniversariantes.
+- Cálculo: usa só dia e mês de `DT_NASC`; janela = hoje + 7 dias seguintes (constante `DIAS_A_FRENTE` em `js/birthdays.js`); 29/02 é tratado como 28/02 em anos não bissextos.
+- Seção independente dos filtros; filtros, cards e dados não foram alterados.
+- Observação: todas as `DT_NASC` da base atual estão em 1999, em sequência (01/01, 02/01, 03/01...), o que parece data provisória e não a real — os aniversariantes exibidos só serão corretos com as datas reais.
+- Não iniciado: contratos de experiência.
+
+## Etapa 4 — Contratos de experiência
+- Nova seção "📄 Contratos de experiência" (abaixo dos aniversários e acima dos filtros), em `js/contracts.js`.
+- Regra da empresa: 30 dias + prorrogação de 60 dias = 90 dias no total. Marcos calculados a partir de `ADMISSÃO`: **admissão + 30 dias** (1º período) e **admissão + 90 dias** (término total).
+- Janela: vencimentos de hoje até 15 dias à frente (`DIAS_A_FRENTE`) e vencidos nos últimos 7 dias (`DIAS_ATRAS`), para não perder um vencimento que acabou de passar (marcados como "Vencido").
+- Cada item mostra nome, loja, função, admissão, data do vencimento e dias restantes; "Vence hoje" destacado; 1º período (âmbar) e Prorrogação (azul) diferenciados por cor e etiqueta, com variações para tema claro/escuro. Ordenação pelo vencimento mais próximo.
+- Cálculo com `Date.UTC` (sem efeito de fuso ou horário de verão; virada de mês/ano e anos bissextos tratados automaticamente).
+- Seção independente dos filtros. Usa apenas campos já existentes; nenhum campo novo foi adicionado à base.
+- Alterações em arquivos existentes foram só de encaixe: uma seção em `index.html`, uma tag `<script>`, uma linha em `js/script.js` (`Contracts.render(visao)`) e estilos acrescentados ao final de `css/styles.css`. Aniversários, filtros, cartões, dados e script de conversão não foram alterados.
+- Conferência: resultado da página igual a um cálculo independente sobre os 339 registros (22 itens na data de teste 29/09/2026).
+- Observação: contam-se 30 e 90 dias corridos após a data de admissão, exatamente como definido. Se o RH preferir contar o dia da admissão como 1º dia (vencimento = admissão + 29 e + 89), a mudança é só nos valores de `PRAZOS` em `js/contracts.js`.
+- Não iniciado: ficha detalhada do colaborador e outros controles.
+
+## Etapa 5 — Identidade visual e atualização de gerentes
+Somente duas alterações; nenhuma funcionalidade nova.
+
+**1. Identidade visual (`css/styles.css`)**
+- Nova paleta sóbria, predominantemente escura: cabeçalho escuro nos dois temas; tema escuro em tons de grafite/azul-acinzentado; tema claro com fundo cinza-azulado e destaque em azul aço. Removido o verde-água vibrante.
+- Cores de contratos de experiência (1º período, prorrogação, vencido) mantêm o mesmo significado, com tons mais discretos nos dois temas.
+- Cantos menos arredondados (cartões 8 px; campos e itens internos 6 px) e `color-scheme` declarado para que campos/listas nativos acompanhem o tema.
+- Tema claro/escuro automático preservado (`prefers-color-scheme`). Contraste de texto conferido: mínimo 5,0:1 no tema claro e 6,4:1 no escuro.
+- Nenhuma alteração em HTML, JavaScript, textos, estrutura ou responsividade.
+
+**2. Gerentes por loja (`data/colaboradores.js`)**
+- Campo `GERENTE` atualizado a partir da `BASE_DASH_GITHUB.xlsx` mais recente: 23 colaboradores alterados.
+  - Loja 4: RAQUEL → RAYANE (1)
+  - Loja 6: RAQUEL/SONIA → SÔNIA (9)
+  - Loja 29: ELANE → KLEBER (13)
+- Nenhum outro campo foi alterado (nomes, funções, supervisores, municípios, nascimentos, admissões, lojas). Cada linha foi conferida contra a planilha por colaborador e loja antes da troca.
+- O filtro Gerente deixa de listar ELANE e SONIA e passa a listar KLEBER e SÔNIA (com acento); os demais filtros têm as mesmas opções.
+- Observação: a planilha nova também traz SUPERVISOR diferente em 9 linhas (loja 4: 1; loja 6: 8). Como o pedido foi alterar só os gerentes, os supervisores **não** foram atualizados. Por isso `scripts/xlsx_para_js.py` não foi executado (ele regravaria todos os campos, inclusive SUPERVISOR).
+
+**Verificação**
+- Página aberta em navegador (temas claro e escuro, desktop e celular 390 px) sem erros de JavaScript.
+- Comparação com a versão anterior: contagem de cartões, busca, limpar filtros, cada filtro, aniversários e contratos de experiência com resultados idênticos; única diferença observada foi o valor de Gerente nos 23 cartões e nas opções do filtro Gerente.
+
