@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Colaboradores | Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__conteudo">
+      <h1>Colaboradores</h1>
+      <p>Visualização do quadro de colaboradores ativos</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="aniversarios" aria-labelledby="aniversarios-titulo">
+      <h2 id="aniversarios-titulo">🎂 Próximos aniversários</h2>
+      <ul id="aniversarios-lista" class="aniversarios__lista"></ul>
+      <p id="aniversarios-vazio" class="aniversarios__vazio" hidden>Nenhum aniversário nos próximos 7 dias.</p>
+    </section>
+
+    <section class="contratos" aria-labelledby="contratos-titulo">
+      <h2 id="contratos-titulo">📄 Contratos de experiência</h2>
+      <p id="contratos-legenda" class="contratos__legenda"></p>
+      <ul id="contratos-lista" class="contratos__lista"></ul>
+      <p id="contratos-vazio" class="contratos__vazio" hidden></p>
+    </section>
+
+    <section class="filtros" aria-label="Busca e filtros">
+      <div class="campo campo--busca">
+        <label for="busca">Buscar por nome</label>
+        <input id="busca" type="search" placeholder="Digite o nome do colaborador" autocomplete="off">
+      </div>
+      <div class="campo"><label for="f-supervisor">Supervisor</label><select id="f-supervisor"></select></div>
+      <div class="campo"><label for="f-gerente">Gerente</label><select id="f-gerente"></select></div>
+      <div class="campo"><label for="f-loja">Loja</label><select id="f-loja"></select></div>
+      <div class="campo"><label for="f-funcao">Função</label><select id="f-funcao"></select></div>
+      <div class="campo"><label for="f-municipio">Município/LOC</label><select id="f-municipio"></select></div>
+      <button id="limpar" class="btn" type="button">Limpar filtros</button>
+    </section>
+
+    <p id="contagem" class="contagem" aria-live="polite"></p>
+    <section id="lista" class="grade" aria-label="Lista de colaboradores"></section>
+    <p id="vazio" class="vazio" hidden>Nenhum colaborador encontrado com os filtros atuais.</p>
+  </main>
+
+  <script src="data/colaboradores.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/birthdays.js"></script>
+  <script src="js/contracts.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
