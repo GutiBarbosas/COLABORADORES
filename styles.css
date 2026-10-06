@@ -1,0 +1,102 @@
+:root{
+  color-scheme:light dark;
+  --bg:#eceff3; --card:#ffffff; --texto:#1b2430; --suave:#5b6675; --borda:#d3d9e1;
+  --primaria:#2b5a85; --primaria-clara:#e3ecf5; --sombra:0 1px 2px rgba(16,24,40,.06);
+  --raio:8px;
+  --topo-bg:#141b24; --topo-borda:#0e131a; --topo-texto:#e8ecf2; --topo-suave:#9aa6b6;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0d1218; --card:#151c25; --texto:#e4e8ee; --suave:#97a2b1; --borda:#2b3644;
+        --primaria:#7fa6cc; --primaria-clara:#1b2838; --sombra:none;
+        --topo-bg:#10161d; --topo-borda:#2b3644; --topo-texto:#e8ecf2; --topo-suave:#8f9bab;}
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--texto)}
+.topo{background:var(--topo-bg);border-bottom:1px solid var(--topo-borda)}
+.topo__conteudo{max-width:1280px;margin:0 auto;padding:22px 20px}
+.topo h1{margin:0;font-size:1.5rem;color:var(--topo-texto)}
+.topo p{margin:4px 0 0;color:var(--topo-suave);font-size:.95rem}
+.container{max-width:1280px;margin:0 auto;padding:20px}
+
+.filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end;
+  background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);padding:16px;box-shadow:var(--sombra)}
+.campo--busca{grid-column:1/-1}
+.campo label{display:block;font-size:.75rem;font-weight:600;color:var(--suave);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
+input,select,.btn{width:100%;height:42px;padding:0 12px;font:inherit;font-size:.95rem;color:var(--texto);
+  background:var(--bg);border:1px solid var(--borda);border-radius:6px}
+input:focus,select:focus,.btn:focus-visible{outline:2px solid var(--primaria);outline-offset:1px}
+.btn{cursor:pointer;font-weight:600;background:var(--primaria-clara);color:var(--primaria);border-color:transparent}
+.btn:hover{filter:brightness(.96)}
+@media(min-width:900px){.campo--busca{grid-column:span 2}}
+
+.contagem{margin:18px 2px 10px;color:var(--suave);font-size:.9rem}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.cartao{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);padding:16px;box-shadow:var(--sombra)}
+.cartao__topo{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.avatar{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  background:var(--primaria-clara);color:var(--primaria);font-weight:700}
+.cartao h2{margin:0;font-size:1rem;line-height:1.25;overflow-wrap:anywhere}
+.tag{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600;
+  letter-spacing:.03em;background:var(--primaria-clara);color:var(--primaria)}
+.dados{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:.88rem}
+.dados dt{color:var(--suave)}
+.dados dd{margin:0;text-align:right;font-weight:500;overflow-wrap:anywhere}
+.vazio{text-align:center;color:var(--suave);padding:40px 0}
+
+/* Próximos aniversários */
+.aniversarios{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);padding:16px;margin-bottom:16px;box-shadow:var(--sombra)}
+.aniversarios h2{margin:0 0 12px;font-size:1.05rem}
+.aniversarios__lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.aniv{display:flex;gap:12px;align-items:center;padding:10px 12px;background:var(--bg);border:1px solid var(--borda);border-radius:6px}
+.aniv__data{flex:none;min-width:56px;text-align:center;font-weight:700;color:var(--primaria);display:flex;flex-direction:column;gap:4px;align-items:center}
+.aniv__info{min-width:0;display:flex;flex-direction:column;font-size:.88rem}
+.aniv__info span{color:var(--suave);font-size:.8rem}
+.aniv--hoje{border-color:var(--primaria);background:var(--primaria-clara)}
+.aniv__hoje{padding:1px 8px;border-radius:999px;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;background:var(--primaria);color:var(--card)}
+.aniversarios__vazio{margin:0;color:var(--suave);font-size:.92rem}
+
+/* Contratos de experiência */
+:root{
+  --c30:#8a5a12; --c30-fundo:#f6ecd6;
+  --c90:#2b5a85; --c90-fundo:#e0eaf4;
+  --alerta:#9b2c2c; --alerta-fundo:#f6e2e2;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --c30:#d1a55a; --c30-fundo:#2a2313;
+    --c90:#8fb0d3; --c90-fundo:#1a2739;
+    --alerta:#e0908f; --alerta-fundo:#331d20;
+  }
+}
+.contratos{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);padding:16px;margin-bottom:16px;box-shadow:var(--sombra)}
+.contratos h2{margin:0 0 4px;font-size:1.05rem}
+.contratos__legenda{margin:0 0 12px;color:var(--suave);font-size:.82rem}
+.contratos__lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.contr{display:flex;gap:12px;align-items:center;padding:10px 12px;background:var(--bg);border:1px solid var(--borda);border-left-width:4px;border-radius:6px}
+.contr--primeiro{border-left-color:var(--c30)}
+.contr--prorrogacao{border-left-color:var(--c90)}
+.contr__dias{flex:none;width:84px;text-align:center;display:flex;flex-direction:column;gap:2px;align-items:center}
+.contr__dias strong{font-size:1.4rem;line-height:1.1}
+.contr__dias span{font-size:.68rem;color:var(--suave);line-height:1.2}
+.contr--primeiro .contr__dias strong{color:var(--c30)}
+.contr--prorrogacao .contr__dias strong{color:var(--c90)}
+.contr__info{min-width:0;display:flex;flex-direction:column;gap:2px;font-size:.88rem}
+.contr__info span{color:var(--suave);font-size:.8rem}
+.contr__etiquetas{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.contr__info .contr__tipo,.contr__info .contr__situacao{padding:1px 8px;border-radius:999px;font-size:.7rem;font-weight:600;letter-spacing:.03em}
+.contr--primeiro .contr__tipo{background:var(--c30-fundo);color:var(--c30)}
+.contr--prorrogacao .contr__tipo{background:var(--c90-fundo);color:var(--c90)}
+.contr__info .contr__situacao{background:var(--alerta-fundo);color:var(--alerta)}
+.contr--hoje{background:var(--alerta-fundo);border-color:var(--alerta)}
+.contr--hoje .contr__dias strong{color:var(--alerta);font-size:1rem;text-transform:uppercase;letter-spacing:.03em}
+.contr--vencido .contr__dias strong{color:var(--alerta)}
+.contratos__vazio{margin:0;color:var(--suave);font-size:.92rem}
+
+/* Colaboradores por sexo */
+.sexo{background:var(--card);border:1px solid var(--borda);border-radius:var(--raio);padding:16px;margin-bottom:16px;box-shadow:var(--sombra)}
+.sexo h2{margin:0 0 12px;font-size:1.05rem}
+.sexo__lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.sexo__item{display:flex;gap:12px;align-items:center;padding:10px 12px;background:var(--bg);border:1px solid var(--borda);border-radius:6px}
+.sexo__item strong{flex:none;min-width:56px;text-align:center;font-size:1.4rem;line-height:1.1;color:var(--primaria)}
+.sexo__item span{font-size:.88rem}
+.sexo__vazio{margin:12px 0 0;color:var(--suave);font-size:.82rem}
