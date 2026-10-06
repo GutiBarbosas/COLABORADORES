@@ -1,10 +1,10 @@
 // Seção "Colaboradores por sexo": contagem de homens e mulheres a partir de SEXO.
 // Calculada dinamicamente sobre a base carregada; independe dos filtros.
-// Na planilha: H = homem, M = mulher (F também é aceito como feminino).
+// Na planilha atual: "Masculino" e "Feminino" (também aceitos: H = homem, M/F = mulher).
 // Vazio ou qualquer outro valor não entra na contagem de homens nem de mulheres.
 const Gender = {
-  MASCULINO: ["H"],
-  FEMININO: ["M", "F"],
+  MASCULINO: ["MASCULINO", "H"],
+  FEMININO: ["FEMININO", "M", "F"],
 
   contar(lista) {
     const total = { homens: 0, mulheres: 0, naoClassificados: 0 };
